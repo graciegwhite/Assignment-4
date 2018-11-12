@@ -12,11 +12,21 @@ Packages and datasets
 ```{r, include = FALSE}
 #Packages
 library(tidyverse)
-
-
+library(pwr)
+library(knitr)
+library(kableExtra)
+library(plotly)
+library(extrafont)
+library(ggrepel)
+library(vcdExtra)
 
 #Datasets
-lobster_size <- read_csv("lobster_size_abundance.csv")
-traps <- read_csv("lobster_traps.csv")
+lobster_size_df <- read_csv("lobster_size_abundance.csv")
+traps_df <- read_csv("lobster_traps.csv")
+
+#reformatting data into tidy format
+
+size_df <- expand.dft(lobster_size_df, var.names = NULL, freq = "COUNT")
+
 ```
 
