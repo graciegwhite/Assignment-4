@@ -1,0 +1,22 @@
+---
+title: "Assignment 4"
+author: "Gracie White"
+date: "November 12, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+Packages and datasets
+```{r, include = FALSE}
+#Packages
+library(tidyverse)
+
+
+
+#Datasets
+lobster_size <- read_csv("lobster_size_abundance.csv")
+traps <- read_csv("lobster_traps.csv")
+```
+
