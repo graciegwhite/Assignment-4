@@ -155,6 +155,16 @@ lsize_sitesmpa_df <- lobster_size_df %>%
 # Expand Rows
 lsizempa_expanded <- uncount(lsize_sitesmpa_df, weights = COUNT, .remove = FALSE)
 
+# For exploration purposes, perhaps a facet-wrapped histogram of size distributions?
+
+size_hist <- ggplot(lsize_expanded, aes(x = SIZE)) +
+  geom_histogram(bins = 15, aes(fill = SITE)) +
+  facet_wrap(~ SITE, scale = "free") + 
+  theme_classic() +
+  theme(legend.position = "none") + 
+  scale_y_continuous(expand = c(0,0))
+
+size_hist
 
 # Use t-tests to compare means
 
