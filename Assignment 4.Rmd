@@ -28,23 +28,23 @@ traps_df <- read_csv("lobster_traps.csv")
 ##1. Initial Observations
 ```{r}
 #Fishing Pressure
-
+#First, filter the data so we only keep relevant info
 traps5_df <- traps_df %>%
   select(YEAR, MONTH, FISHING_SEASON, SITE, TRAPS) %>%
   filter(SITE == "CARP" | SITE == "AQUE" | SITE == "IVEE" | SITE == "NAPL" | SITE == "MOHK") %>%
   group_by(SITE, YEAR) 
   
-  
+#Summary table of lobster traps each year by site  
 trap5_sumtable <- summarize(traps5_df, med_traps = median(TRAPS), max_traps = max(TRAPS), mean_traps = mean(TRAPS), sd_traps = sd(TRAPS), sample_size = length(TRAPS)) %>% 
   mutate(MPA = ifelse(SITE == "IVEE" | SITE == "NAPL", "MPA", "No MPA"))
-
+#Line graph of mean lobster traps by year for each site
 traps_line_g <- ggplot(trap5_sumtable, aes(x = YEAR, y = mean_traps, group = SITE, color = SITE)) +
   geom_line(size = 1, alpha = 0.8, aes(linetype = MPA)) +
   labs(x = "Mean Lobster Traps", y = "Year", title = "Average Lobster Traps (2012-2017)")
 
 traps_line_g
 
-
+#looks like fishing pressure is decreasing over time
 ```
 ######Size Observations
 ```{r}
@@ -56,6 +56,9 @@ lsize_allyears_df <- lobster_size_df %>%
 
 lsize_expanded <- uncount(lsize_allyears_df, weights = COUNT, .remove = FALSE)
 View(lsize_expanded)
+
+
+
 ```
 
 
