@@ -40,24 +40,34 @@ trap5_sumtable <- summarize(traps5_df, med_traps = median(TRAPS), max_traps = ma
 #Line graph of mean lobster traps by year for each site
 traps_line_g <- ggplot(trap5_sumtable, aes(x = YEAR, y = mean_traps, group = SITE, color = SITE)) +
   geom_line(size = 1, alpha = 0.8, aes(linetype = MPA)) +
-  labs(x = "Mean Lobster Traps", y = "Year", title = "Average Lobster Traps (2012-2017)")
+  labs(x = "Year", y = "Mean Lobster Traps", title = "Average Lobster Traps (2012-2017)")
 
 traps_line_g
 
 #looks like fishing pressure is decreasing over time
 ```
-######Size Observations
+######Abundance Observations
 ```{r}
-# Reformat size data into tidy format
-# Filter sites and omit counts of "0"
-lsize_allyears_df <- lobster_size_df %>% 
+
+# Filter sites 
+lobcount_allyears_df <- lobster_size_df %>% 
   filter(SITE == "AQUE"| SITE == "NAPL"| SITE == "MOHK"| SITE == "IVEE"| SITE == "CARP", COUNT != "0") %>% 
-  select(YEAR, SITE, SIZE, COUNT)
+  select(YEAR, SITE, COUNT) %>% 
+  group_by(SITE, YEAR)
+#add up all lobster observations by site and year
+lobcount <- aggregate(COUNT~SITE+YEAR, data = lobcount_allyears_df, sum) 
+#Create column to specify if site is an MPA or not  
+lobcount <- mutate(lobcount, MPA = ifelse(SITE == "IVEE" | SITE == "NAPL", "MPA", "No MPA")) %>% 
+  group_by(SITE, YEAR)
 
-lsize_expanded <- uncount(lsize_allyears_df, weights = COUNT, .remove = FALSE)
-View(lsize_expanded)
+#line graph of abundance by site
+abundance_line_g <- ggplot(lobcount, aes(x = YEAR, y = COUNT, group = SITE, color = SITE)) +
+  geom_line(size = 1, alpha = 0.8, aes(linetype = MPA)) +
+  labs(x = "Year", y = "Number of Lobsters Observed", title = "Lobster Abundance (2012-2017)") +
+  scale_y_continuous(expand = c(0,0)) +
+  scale_x_continuous(expand = c(0,0))
 
-
+abundance_line_g
 
 ```
 
@@ -71,11 +81,10 @@ lsize_sites_df <- lobster_size_df %>%
   filter(SITE == "AQUE"| SITE == "NAPL"| SITE == "MOHK"| SITE == "IVEE"| SITE == "CARP", COUNT != "0", YEAR == "2017") %>% 
   select(YEAR, SITE, SIZE, COUNT)
 
-View(lsize_sites_df)
 
 # Expand Rows
 lsize_expanded <- uncount(lsize_sites_df, weights = COUNT, .remove = FALSE)
-View(lsize_expanded)
+
 ```
 
 
@@ -138,11 +147,10 @@ lsize_sitesmpa_df <- lobster_size_df %>%
          YEAR == "2012"| YEAR == "2017") %>% 
   select(YEAR, SITE, SIZE, COUNT)
 
-View(lsize_sitesmpa_df)
 
 # Expand Rows
 lsizempa_expanded <- uncount(lsize_sitesmpa_df, weights = COUNT, .remove = FALSE)
-View(lsizempa_expanded)
+
 
 
 ```
