@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 Packages and datasets
 ```{r, include = FALSE}
-#Packages
+# Install necessary packages
 library(tidyverse)
 library(pwr)
 library(knitr)
@@ -20,13 +20,9 @@ library(extrafont)
 library(ggrepel)
 library(vcdExtra)
 
-#Datasets
+# Load Datasets
 lobster_size_df <- read_csv("lobster_size_abundance.csv")
 traps_df <- read_csv("lobster_traps.csv")
-
-#reformatting data into tidy format
-
-size_df <- expand.dft(lobster_size_df, freq = "COUNT")
 
 ```
 ##1. Initial Observations
@@ -52,7 +48,23 @@ traps_line_g
 
 ```
 
+
+
 ####Part 2. Compare Mean Lobster Size by Site in 2017
+
+```{r}
+# Reformat size data into tidy format
+# Filter sites and omit counts of "0"
+lsize_sites_df <- lobster_size_df %>% 
+  filter(SITE == "AQUE"| SITE == "NAPL"| SITE == "MOHK"| SITE == "IVEE"| SITE == "CARP", COUNT != "0", YEAR == "2017") %>% 
+  select(YEAR, SITE, SIZE, COUNT)
+
+View(lsize_sites_df)
+
+lsize_expanded <- uncount(lsize_sites_df, weights = COUNT, .remove = FALSE)
+View(lsize_expanded)
+```
+
 ```{r}
 # One variable (carapace length (mm)), 5 factors
 # Perform one-sided ANOVA
