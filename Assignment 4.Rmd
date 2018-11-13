@@ -61,6 +61,7 @@ lsize_sites_df <- lobster_size_df %>%
 
 View(lsize_sites_df)
 
+# Expand Rows
 lsize_expanded <- uncount(lsize_sites_df, weights = COUNT, .remove = FALSE)
 View(lsize_expanded)
 ```
@@ -115,5 +116,20 @@ size_sum_df
 ```{r}
 # MPA Sites: IVEE, NAPL
 # Non-MPA Sites: IVEE, NAPL
+
+# Reformat size data into tidy format
+# Filter sites and omit counts of "0"
+lsize_sitesmpa_df <- lobster_size_df %>% 
+  filter(SITE == "AQUE"| SITE == "NAPL"| SITE == "MOHK"| SITE == "IVEE"| SITE == "CARP", COUNT != "0",
+         YEAR == "2012"| YEAR == "2017") %>% 
+  select(YEAR, SITE, SIZE, COUNT)
+
+View(lsize_sitesmpa_df)
+
+# Expand Rows
+lsizempa_expanded <- uncount(lsize_sitesmpa_df, weights = COUNT, .remove = FALSE)
+View(lsizempa_expanded)
+
+
 ```
 
