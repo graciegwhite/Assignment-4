@@ -1,0 +1,76 @@
+---
+title: "Sandy"
+author: "Sandra Fogg"
+date: "11/12/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+# Install packages
+library(tidyverse)
+library(pwr)
+library(knitr)
+library(kableExtra)
+library(plotly)
+library(extrafont)
+library(ggrepel)
+library(vcdExtra)
+
+# Read Datasets
+lobster_size_df <- read_csv("lobster_size_abundance.csv")
+traps_df <- read_csv("lobster_traps.csv")
+
+# Reformat size data into tidy format
+# Filter sites and omit counts of "0"
+lsize_sites_df <- lobster_size_df %>% 
+  filter(SITE == "AQUE"| SITE == "NAPL"| SITE == "MOHK"| SITE == "IVEE"| SITE == "CARP", COUNT != "0", YEAR == "2017") %>% 
+  select(YEAR, SITE, SIZE, COUNT)
+
+View(lsize_sites_df)
+
+lsize_expanded <- uncount(lsize_sites_df, weights = COUNT, .remove = FALSE)
+View(lsize_expanded)
+
+```
+
+####Part 2. Compare Mean Lobster Size by Site in 2017
+```{r}
+# One variable (carapace length (mm)), 5 factors
+# Perform one-sided ANOVA
+
+# Identify hypotheses
+# H0: Means across all groups are equal
+# HA: At least two group means differ significantly
+size_aov <- aov(SIZE ~ SITE, data = lsize_expanded)
+summary(size_aov)
+
+# Sample means are this different because they were most likely drawn for different population
+# H0: Means across all groups are equal
+# HA: At least two group means differ significantly
+
+# p-value is <0.05 -> Reject the null.  There is a significant difference in means.  
+# Sample means are this different because they were most likely drawn for different population
+# Use post-hoc testing to see which sites differ
+
+# Identify hypotheses
+# H0:  There is no significant difference in pairwise means
+# HA: There is a significant difference in pairwise means
+size_pht <- TukeyHSD(size_aov)
+size_pht
+
+# p-value is <0.05 for sites (NAPL-CARP), (NAPL-IVEE)
+# Reject the null for sites (NAPL-CARP), (NAPL-IVEE)
+
+# Create a box-plot for visual mean comparison
+
+
+```
+
+Mean flipper lengths of female penguins differed significantly for all species studied (one-way anova, F(df) = statistic, p < 0.001, $\alpha$ = 0.05 with post-hoc Tukey's HSD, $\alpha$ = 0.05)
+```
+
