@@ -41,11 +41,14 @@ trap5_sumtable <- summarize(traps5_df, med_traps = median(TRAPS), max_traps = ma
 # Line graph of mean lobster traps by year for each site
 traps_line_g <- ggplot(trap5_sumtable, aes(x = YEAR, y = mean_traps, group = SITE, color = SITE)) +
   geom_line(size = 1, alpha = 0.8, aes(linetype = MPA)) +
+  theme_classic() +
+  scale_y_continuous(expand = c(0,0)) +
+  scale_x_continuous(expand = c(0,0)) +
   labs(x = "Year", y = "Mean Lobster Traps", title = "Average Lobster Traps (2012-2017)")
 
 traps_line_g
 
-# looks like fishing pressure is decreasing over time
+# looks like fishing pressure is decreasing over time. The drop after 2016 is probably a result of the decreased abundance seen in the next figure? Note that there are no traps in the MPA sites. 
 ```
 ######Abundance Observations
 ```{r}
@@ -70,7 +73,7 @@ abundance_line_g <- ggplot(lobcount, aes(x = YEAR, y = COUNT, group = SITE, colo
   theme_classic()
 
 abundance_line_g
-
+#Abundance has recently increased in IVEE and CARP, but decreased or stayed similar at other sites. Why is there a peak in 2015, and an overall decrease in 2016? Was there an event that we should be aware of? Why is CARP increasing so much when it's not an MPA, and conversely, why is the NAPL MPA decreasing? Perhaps an El Niño event? A change in fishery regulations? A lobster disease? 
 ```
 
 
