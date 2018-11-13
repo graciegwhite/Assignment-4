@@ -52,7 +52,56 @@ traps_line_g
 
 ```
 
+####Part 2. Compare Mean Lobster Size by Site in 2017
 ```{r}
-#kjfdklajfld
+# One variable (carapace length (mm)), 5 factors
+# Perform one-sided ANOVA
+
+# Identify hypotheses
+# H0: Means across all groups are equal
+# HA: At least two group means differ significantly
+size_aov <- aov(SIZE ~ SITE, data = lsize_expanded)
+summary(size_aov)
+
+# Sample means are this different because they were most likely drawn for different population
+# H0: Means across all groups are equal
+# HA: At least two group means differ significantly
+
+# p-value is <0.05 -> Reject the null.  There is a significant difference in means.  
+# Sample means are this different because they were most likely drawn for different population
+# Use post-hoc testing to see which sites differ
+
+# Identify hypotheses
+# H0:  There is no significant difference in pairwise means
+# HA: There is a significant difference in pairwise means
+size_pht <- TukeyHSD(size_aov)
+size_pht
+
+# p-value is <0.05 for sites (NAPL-CARP), (NAPL-IVEE)
+# Reject the null for sites (NAPL-CARP), (NAPL-IVEE)
+
+# Create a box-plot for visual mean comparison
+size_bp <- ggplot(lsize_expanded, aes(x = SITE, y = SIZE)) +
+  geom_boxplot(aes(color = SITE)) +
+  ggtitle("Lobster Carapace Lengths at 5 LTER Sites in the Santa Barbara Channel, 2017") +
+  xlab("Site") +
+  ylab("Carapace Length (mm)") +
+  theme_classic() +
+  scale_colour_brewer("Site", palette = "Set2")
+size_bp
+
+# Create a data summary table to compare means
+size_sum_df <- lsize_expanded %>% 
+  group_by(SITE) %>% 
+  summarize(count = n(), 
+    mean = mean(SIZE),
+    sd = sd(SIZE))
+size_sum_df
+```
+
+####Part 3. Changes in lobster size at MPA and non-MPA sites (comparing only 2012 and 2017 sizes)
+```{r}
+# MPA Sites: IVEE, NAPL
+# Non-MPA Sites: IVEE, NAPL
 ```
 
