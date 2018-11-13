@@ -87,6 +87,10 @@ size_sum_df <- lsize_expanded %>%
 size_sum_df
 ```
 
-Mean carapace lengths (mm) of lobsters differed significantly between sites NAPL and CARP, as well as between sites NAPL and IVEE (one-way anova, F(df) = statistic, *p* = `r {round(size_pht$p.value, 3)}` , $\alpha$ = 0.05 with post-hoc Tukey's HSD, $\alpha$ = 0.05)
+Mean carapace lengths (mm) of lobsters differed significantly between sites NAPL and CARP, as well as between sites NAPL and IVEE (one-way anova, F(df) = statistic,  , $\alpha$ = 0.05 with post-hoc Tukey's HSD, $\alpha$ = 0.05)
+```
+
+```{r}
+
 ```
 
