@@ -218,6 +218,13 @@ eff_size_IVEE
 
 # d-estimate: -0.377 (small)
 
+# power test
+
+power_IVEE <- pwr.t.test(n = 632, d = .377, sig.level = 0.05, power = NULL)
+power_IVEE
+
+# power = .999
+
 
 
 # MPA - NAPL
@@ -259,6 +266,12 @@ eff_size_NAPL
 
 # d-estimate: -0.283 (small)
 
+# power test
+
+power_NAPL <- pwr.t.test(n = 118, d = .283, sig.level = 0.05, power = NULL)
+power_NAPL
+
+# power = .581
 
 
 
@@ -303,6 +316,12 @@ eff_size_AQUE
 
 # d-estimate: -0.256 (small)
 
+# power test
+
+power_AQUE <- pwr.t.test(n = 105, d = .256, sig.level = 0.05, power = NULL)
+power_AQUE
+
+# power = .4548
 
 
 
@@ -344,6 +363,13 @@ eff_size_CARP <- cohen.d(CARP_2012, CARP_2017)
 eff_size_CARP
 
 # d-estimate: 0.159 (negligible)
+
+# power test
+
+power_CARP <- pwr.t.test(n = 783, d = .159, sig.level = 0.05, power = NULL)
+power_CARP
+
+# power = .882
 
 
 
@@ -395,6 +421,13 @@ eff_size_MOHK <- cohen.d(MOHK_2012, MOHK_2017)
 eff_size_MOHK
 
 # d-estimate: 0.5408 (medium)
+
+# power test
+
+power_MOHK <- pwr.t.test(n = 261, d = .5408, sig.level = 0.05, power = NULL)
+power_MOHK
+
+# power = .999
 
 
 # Summary Table of means at location, each year
