@@ -19,11 +19,8 @@ library(plotly)
 library(extrafont)
 library(ggrepel)
 library(vcdExtra)
-<<<<<<< HEAD
-library(scales)
-=======
 library(effsize)
->>>>>>> 4e6bf4cd0fdd7326050f55a164c6d59c1a689fc8
+
 
 # Load Datasets
 lobster_size_df <- read_csv("lobster_size_abundance.csv")
@@ -31,7 +28,7 @@ traps_df <- read_csv("lobster_traps.csv")
 
 ```
 ##1. Initial Observations
-```{r}
+```{r, echo=FALSE}
 # Fishing Pressure
 # First, filter the data so we only keep relevant info
 traps5_df <- traps_df %>%
@@ -56,7 +53,7 @@ traps_line_g
 # looks like fishing pressure is decreasing over time. The drop after 2016 is probably a result of the decreased abundance seen in the next figure? Note that there are no traps in the MPA sites. 
 ```
 ######Abundance Observations
-```{r}
+```{r, echo=FALSE}
 
 # Filter sites 
 lobcount_allyears_df <- lobster_size_df %>% 
@@ -84,7 +81,7 @@ abundance_line_g
 
 
 ####Part 2. Compare Mean Lobster Size by Site in 2017
-```{r}
+```{r, echo=FALSE}
 # Reformat size data into tidy format
 # Filter sites and omit counts of "0"
 lsize_sites_df <- lobster_size_df %>% 
@@ -98,7 +95,7 @@ lsize_expanded <- uncount(lsize_sites_df, weights = COUNT, .remove = FALSE)
 ```
 
 
-```{r}
+```{r, echo=FALSE}
 # One variable (carapace length (mm)), 5 factors
 # Perform one-sided ANOVA
 
@@ -145,7 +142,7 @@ size_sum_df
 ```
 
 ####Part 3. Changes in lobster size at MPA and non-MPA sites (comparing only 2012 and 2017 sizes)
-```{r}
+```{r, echo=FALSE}
 # MPA Sites: IVEE, NAPL
 # Non-MPA Sites: AQUE, CARP, MOHK
 
@@ -447,7 +444,7 @@ summary_lobster_size
 
 
 ###Part 4
-```{r}
+```{r, echo=FALSE}
 #chi-square test for independance
 #The legal minimum carapace size for lobster is 82.6 mm. What proportion of observed lobsters at each site are above the legal minimum? Does that proportion differ significantly across the 5 sites? 
 #first, set up a table of proportions for 2017. The table should have the sites as the the row names, and then the columns shoulf be the proportions below and above the legal minimum carapace size (82.6mm)
@@ -488,7 +485,7 @@ Standardized residuals greater than |2| indicate significance (I think?)
 
 ###So, we can say that the proportions between legal/illegal lobster size is differant at MOHK and NAPL. At MOHK, 87% of lobsters observed were smaller than the legal limit. At NAPL (an MPA), only 66% of lobsters were below the legal limit. The other three sites had between 74-78% of their lobsters below the legal size limit. 
 
-```{r}
+```{r, echo=FALSE}
 #Making a neat Kable Table of the proportions 
 
 
