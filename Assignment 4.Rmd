@@ -19,7 +19,11 @@ library(plotly)
 library(extrafont)
 library(ggrepel)
 library(vcdExtra)
+<<<<<<< HEAD
 library(scales)
+=======
+library(effsize)
+>>>>>>> 4e6bf4cd0fdd7326050f55a164c6d59c1a689fc8
 
 # Load Datasets
 lobster_size_df <- read_csv("lobster_size_abundance.csv")
@@ -211,6 +215,22 @@ t_IVEE
 # Retain Null that the samples are drawn from populations with the same means
 # Sample Means (2012 = 66.07, 2017 = 71.45)
 
+# Effect Size
+
+eff_size_IVEE <- cohen.d(IVEE_2012, IVEE_2017)
+eff_size_IVEE
+
+# d-estimate: -0.377 (small)
+
+# power test
+
+power_IVEE <- pwr.t.test(n = 632, d = .377, sig.level = 0.05, power = NULL)
+power_IVEE
+
+# power = .999
+
+
+
 # MPA - NAPL
 
 # Creating Vectors for F and T-Tests
@@ -242,6 +262,20 @@ t_NAPL
 # P-Value = .5002
 # Retain Null, samples are drawn from populations with the same means
 # Sample means (2012 = 73, 2017 = 76.23)
+
+# Effect Size
+
+eff_size_NAPL <- cohen.d(NAPL_2012,NAPL_2017)
+eff_size_NAPL
+
+# d-estimate: -0.283 (small)
+
+# power test
+
+power_NAPL <- pwr.t.test(n = 118, d = .283, sig.level = 0.05, power = NULL)
+power_NAPL
+
+# power = .581
 
 
 
@@ -279,6 +313,21 @@ t_AQUE
 # Retain Null, samples are drawn from populations with the same means
 # Sample means (2012 = 71, 2017 = 73.89)
 
+# Effect Size
+
+eff_size_AQUE <- cohen.d(AQUE_2012, AQUE_2017)
+eff_size_AQUE
+
+# d-estimate: -0.256 (small)
+
+# power test
+
+power_AQUE <- pwr.t.test(n = 105, d = .256, sig.level = 0.05, power = NULL)
+power_AQUE
+
+# power = .4548
+
+
 
 # NON MPA - CARP
 
@@ -311,6 +360,21 @@ t_CARP
 # P-Value = .1819
 # Retain Null, samples are drawn from populations with the same means
 # Sample means (2012 = 74.36, 2017 = 72.23)
+
+# Effect Size
+
+eff_size_CARP <- cohen.d(CARP_2012, CARP_2017)
+eff_size_CARP
+
+# d-estimate: 0.159 (negligible)
+
+# power test
+
+power_CARP <- pwr.t.test(n = 783, d = .159, sig.level = 0.05, power = NULL)
+power_CARP
+
+# power = .882
+
 
 
 # NON MPA - MOHK
@@ -354,6 +418,20 @@ onesided_t_MOHK
 
 # P-Value = 3.138e-05
 # Reject Null, mean lobster size in 2012 is greater than mean lobster size in 2017
+
+# Effect Size
+
+eff_size_MOHK <- cohen.d(MOHK_2012, MOHK_2017)
+eff_size_MOHK
+
+# d-estimate: 0.5408 (medium)
+
+# power test
+
+power_MOHK <- pwr.t.test(n = 261, d = .5408, sig.level = 0.05, power = NULL)
+power_MOHK
+
+# power = .999
 
 
 # Summary Table of means at location, each year
