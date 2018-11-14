@@ -156,7 +156,7 @@ lsize_sitesmpa_df <- lobster_size_df %>%
 lsizempa_expanded <- uncount(lsize_sitesmpa_df, weights = COUNT, .remove = FALSE)
 
 # For exploration purposes, perhaps a facet-wrapped histogram of size distributions?
-
+# Probably should make it look prettier. Let's eventually pick a color theme on color brewer and coordinate all of our visuals! 
 size_hist <- ggplot(lsize_expanded, aes(x = SIZE)) +
   geom_histogram(bins = 15, aes(fill = SITE)) +
   facet_wrap(~ SITE, scale = "free") + 
@@ -170,4 +170,26 @@ size_hist
 
 
 ```
+
+
+###Part 4
+```{r}
+#chi-square test for independance
+#The legal minimum carapace size for lobster is 82.6 mm. What proportion of observed lobsters at each site are above the legal minimum? Does that proportion differ significantly across the 5 sites? 
+#first, set up a table of proportions for 2017. The table should have the sites as the the row names, and then the columns shoulf be the proportions below and above the legal minimum carapace size (82.6mm)
+
+lsize_prop_table <- lsize_expanded %>% 
+  select(-YEAR, -COUNT) %>% 
+  mutate(Legality = ifelse(SIZE > 82.6, "Above Legal Minimum", "Below Legal Minimum")) %>% 
+  count(SITE, Legality) %>% 
+  spread(Legality, n) %>% 
+  select(-SITE)
+
+rownames(lsize_prop_table) <- c("AQUE", "CARP", "IVEE", "MOHK", "NAPL")
+
+
+
+
+```
+
 
