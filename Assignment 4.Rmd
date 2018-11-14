@@ -191,6 +191,8 @@ IVEE_2017 <- lsizempa_expanded %>%
   pull(SIZE)
 
 # F Test
+# H0: Variances are EQUAL
+# HA: Variances are NOT equal
 
 IVEE_ftest <- var.test(IVEE_2012, IVEE_2017)
 IVEE_ftest
@@ -198,9 +200,168 @@ IVEE_ftest
 # P value = .05911, so variances are considered EQUAL
 
 # T-Test for IVEE
+# H0: Samples are drawn from populations with the same mean
+# HA: Samples are drawn from populations with different means
 
 t_IVEE <- t.test(IVEE_2012, IVEE_2017, var.equal = TRUE)
 t_IVEE
+
+# P-value = .9414
+# Retain Null that the samples are drawn from populations with the same means
+# Sample Means (2012 = 72.12, 2017 = 72.16)
+
+# MPA - NAPL
+
+# Creating Vectors for F and T-Tests
+
+NAPL_2012 <- lsizempa_expanded %>% 
+  filter(YEAR == "2012" | SITE == "NAPL") %>% 
+  pull(SIZE)
+
+NAPL_2017 <- lsizempa_expanded %>% 
+  filter(YEAR == "2017" | SITE == "NAPL") %>% 
+  pull(SIZE)
+
+# F-Test
+# H0: Variances are EQUAL
+# HA: Variances are NOT equal
+
+NAPL_ftest <- var.test(NAPL_2012, NAPL_2017)
+NAPL_ftest
+
+# P-value = 0.111, so variances are considered EQUAL
+
+# T-Test for NAPL
+# H0: Samples are drawn from populations with the same mean
+# HA: Samples are drawn from populations with different means
+
+t_NAPL <- t.test(NAPL_2012, NAPL_2017, var.equal = TRUE)
+t_NAPL
+
+# P-Value = .0019
+# Reject Null, samples are drawn from populations with different means
+# Sample means (2012 = 74.6, 2017 = 72.3)
+
+# One-sided t-test
+# H0: Mean lobster size in 2012 is not greater than mean lobster size in 2017
+# HA: Mean lobster size in 2012 is greater than mean lobster size in 2017
+
+oneside_t_NAPL <- t.test(NAPL_2012, NAPL_2017, var.equal = TRUE, alternative = "greater")
+oneside_t_NAPL
+
+# P-Value = .00098
+# Reject Null, Mean lobster size in 2012 is greater than mean lobster size in 2017
+
+
+# NON-MPA
+
+# NON MPA - AQUE
+
+# Creating Vectors for F and T-Tests
+
+AQUE_2012 <- lsizempa_expanded %>% 
+  filter(YEAR == "2012" | SITE == "AQUE") %>% 
+  pull(SIZE)
+
+AQUE_2017 <- lsizempa_expanded %>% 
+  filter(YEAR == "2017" | SITE == "AQUE") %>% 
+  pull(SIZE)
+
+# F-Test
+# H0: Variances are EQUAL
+# HA: Variances are NOT equal
+
+AQUE_ftest <- var.test(AQUE_2012, AQUE_2017)
+AQUE_ftest
+
+# P-value = 0.2712, so variances are considered EQUAL
+
+# T-Test for NAPL
+# H0: Samples are drawn from populations with the same mean
+# HA: Samples are drawn from populations with different means
+
+t_AQUE <- t.test(AQUE_2012, AQUE_2017, var.equal = TRUE)
+t_AQUE
+
+# P-Value = .043
+# Reject Null, samples are drawn from populations with different means
+# Sample means (2012 = 73.88, 2017 = 72.23)
+
+# One-sided t-test
+# H0: Mean lobster size in 2012 is not greater than mean lobster size in 2017
+# HA: Mean lobster size in 2012 is greater than mean lobster size in 2017
+
+oneside_t_AQUE <- t.test(AQUE_2012, AQUE_2017, var.equal = TRUE, alternative = "greater")
+oneside_t_AQUE
+
+# P-Value = .0215
+# Reject Null, Mean lobster size in 2012 is greater than mean lobster size in 2017
+
+
+# NON MPA - CARP
+
+# Creating Vectors for F and T-Tests
+
+CARP_2012 <- lsizempa_expanded %>% 
+  filter(YEAR == "2012" | SITE == "CARP") %>% 
+  pull(SIZE)
+
+CARP_2017 <- lsizempa_expanded %>% 
+  filter(YEAR == "2017" | SITE == "CARP") %>% 
+  pull(SIZE)
+
+# F-Test
+# H0: Variances are EQUAL
+# HA: Variances are NOT equal
+
+CARP_ftest <- var.test(CARP_2012, CARP_2017)
+CARP_ftest
+
+# P-value = 0.714, so variances are considered EQUAL
+
+# T-Test for CARP
+# H0: Samples are drawn from populations with the same mean
+# HA: Samples are drawn from populations with different means
+
+t_CARP <- t.test(CARP_2012, CARP_2017, var.equal = TRUE)
+t_CARP
+
+# P-Value = .5939
+# Retain Null, samples are drawn from populations with the same means
+# Sample means (2012 = 72.63, 2017 = 72.35)
+
+
+# NON MPA - MOHK
+
+# Creating Vectors for F and T-Tests
+
+MOHK_2012 <- lsizempa_expanded %>% 
+  filter(YEAR == "2012" | SITE == "MOHK") %>% 
+  pull(SIZE)
+
+MOHK_2017 <- lsizempa_expanded %>% 
+  filter(YEAR == "2017" | SITE == "MOHK") %>% 
+  pull(SIZE)
+
+# F-Test
+# H0: Variances are EQUAL
+# HA: Variances are NOT equal
+
+MOHK_ftest <- var.test(MOHK_2012, MOHK_2017)
+MOHK_ftest
+
+# P-value = 0.0003, so variances are considered NOT EQUAL
+
+# T-Test for NAPL
+# H0: Samples are drawn from populations with the same mean
+# HA: Samples are drawn from populations with different means
+
+t_MOHK <- t.test(MOHK_2012, MOHK_2017)
+t_MOHK
+
+# P-Value = .3776
+# Retain Null, samples are drawn from populations with the same means
+# Sample means (2012 = 73.06, 2017 = 72.49)
 
 ```
 
