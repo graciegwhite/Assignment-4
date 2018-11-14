@@ -19,6 +19,7 @@ library(plotly)
 library(extrafont)
 library(ggrepel)
 library(vcdExtra)
+library(scales)
 
 # Load Datasets
 lobster_size_df <- read_csv("lobster_size_abundance.csv")
@@ -409,4 +410,14 @@ Standardized residuals greater than |2| indicate significance (I think?)
 
 ###So, we can say that the proportions between legal/illegal lobster size is differant at MOHK and NAPL. At MOHK, 87% of lobsters observed were smaller than the legal limit. At NAPL (an MPA), only 66% of lobsters were below the legal limit. The other three sites had between 74-78% of their lobsters below the legal size limit. 
 
+```{r}
+#Making a neat Kable Table of the proportions 
+
+
+lob_prob_table <- kable(lob_prop, digits = 2) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE) 
+
+lob_prob_table
+
+```
 
