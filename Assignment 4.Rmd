@@ -245,8 +245,8 @@ IVEE          -1.2357993           1.2357993
 MOHK          -3.2327773           3.2327773
 NAPL           2.5706474          -2.5706474
 
-Standardized residuals greater than |2| mean significant (I think?)
+Standardized residuals greater than |2| indicate significance (I think?)
 
-
+###So, we can say that the proportions between legal/illegal lobster size is differant at MOHK and NAPL. At MOHK, 87% of lobsters observed were smaller than the legal limit. At NAPL (an MPA), only 66% of lobsters were below the legal limit. The other three sites had between 74-78% of their lobsters below the legal size limit. 
 
 
