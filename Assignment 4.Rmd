@@ -19,6 +19,7 @@ library(plotly)
 library(extrafont)
 library(ggrepel)
 library(vcdExtra)
+library(effsize)
 
 # Load Datasets
 lobster_size_df <- read_csv("lobster_size_abundance.csv")
@@ -210,6 +211,15 @@ t_IVEE
 # Retain Null that the samples are drawn from populations with the same means
 # Sample Means (2012 = 66.07, 2017 = 71.45)
 
+# Effect Size
+
+eff_size_IVEE <- cohen.d(IVEE_2012, IVEE_2017)
+eff_size_IVEE
+
+# d-estimate: -0.377 (small)
+
+
+
 # MPA - NAPL
 
 # Creating Vectors for F and T-Tests
@@ -241,6 +251,14 @@ t_NAPL
 # P-Value = .5002
 # Retain Null, samples are drawn from populations with the same means
 # Sample means (2012 = 73, 2017 = 76.23)
+
+# Effect Size
+
+eff_size_NAPL <- cohen.d(NAPL_2012,NAPL_2017)
+eff_size_NAPL
+
+# d-estimate: -0.283 (small)
+
 
 
 
@@ -278,6 +296,15 @@ t_AQUE
 # Retain Null, samples are drawn from populations with the same means
 # Sample means (2012 = 71, 2017 = 73.89)
 
+# Effect Size
+
+eff_size_AQUE <- cohen.d(AQUE_2012, AQUE_2017)
+eff_size_AQUE
+
+# d-estimate: -0.256 (small)
+
+
+
 
 # NON MPA - CARP
 
@@ -310,6 +337,14 @@ t_CARP
 # P-Value = .1819
 # Retain Null, samples are drawn from populations with the same means
 # Sample means (2012 = 74.36, 2017 = 72.23)
+
+# Effect Size
+
+eff_size_CARP <- cohen.d(CARP_2012, CARP_2017)
+eff_size_CARP
+
+# d-estimate: 0.159 (negligible)
+
 
 
 # NON MPA - MOHK
@@ -353,6 +388,13 @@ onesided_t_MOHK
 
 # P-Value = 3.138e-05
 # Reject Null, mean lobster size in 2012 is greater than mean lobster size in 2017
+
+# Effect Size
+
+eff_size_MOHK <- cohen.d(MOHK_2012, MOHK_2017)
+eff_size_MOHK
+
+# d-estimate: 0.5408 (medium)
 
 
 # Summary Table of means at location, each year
