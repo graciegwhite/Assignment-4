@@ -220,9 +220,33 @@ lsize_prop_table <- lsize_expanded %>%
 
 rownames(lsize_prop_table) <- c("AQUE", "CARP", "IVEE", "MOHK", "NAPL")
 
+#H0:There is no different in proportions
+#HA: There is a difference in proportions
 
+#look at the actual proportions
+
+lob_prop <- prop.table(as.matrix(lsize_prop_table), 1)
+
+#run a chi-square test for independence 
+
+lsize_x2 <- chisq.test(lsize_prop_table)
+lsize_x2
+
+#p-value = 0.0009864, reject the null! We have significant evidence to suggest there is a difference in proportions of lobsters above/below the legal size limit between sites
 
 
 ```
+
+ #in console, running lsize_x2$stdres to see which sites differ significantly:
+ Above Legal Minimum Below Legal Minimum
+AQUE           0.1464223          -0.1464223
+CARP           1.8631463          -1.8631463
+IVEE          -1.2357993           1.2357993
+MOHK          -3.2327773           3.2327773
+NAPL           2.5706474          -2.5706474
+
+Standardized residuals greater than |2| mean significant (I think?)
+
+
 
 
