@@ -19,6 +19,7 @@ library(plotly)
 library(extrafont)
 library(ggrepel)
 library(vcdExtra)
+library(car)
 
 # Load Datasets
 lobster_size_df <- read_csv("lobster_size_abundance.csv")
@@ -97,6 +98,9 @@ lsize_expanded <- uncount(lsize_sites_df, weights = COUNT, .remove = FALSE)
 # One variable (carapace length (mm)), 5 factors
 # Perform one-sided ANOVA
 
+# Run a Levene's test to assess variances
+size_lt <- leveneTest(SIZE ~ SITE, data = lsize_expanded)
+
 # Identify hypotheses
 # H0: Means across all groups are equal
 # HA: At least two group means differ significantly
@@ -156,7 +160,7 @@ lsize_sitesmpa_df <- lobster_size_df %>%
 lsizempa_expanded <- uncount(lsize_sitesmpa_df, weights = COUNT, .remove = FALSE)
 
 # For exploration purposes, perhaps a facet-wrapped histogram of size distributions?
-# Probably should make it look prettier. Let's eventually pick a color theme on color brewer and coordinate all of our visuals! 
+# Probably should make it look prettier. Let's eventually pick a color theme on color brewer and coordinate all of our visuals! <- like that
 size_hist <- ggplot(lsize_expanded, aes(x = SIZE)) +
   geom_histogram(bins = 15, aes(fill = SITE)) +
   facet_wrap(~ SITE, scale = "free") + 
