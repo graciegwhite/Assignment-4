@@ -84,7 +84,7 @@ lobcount <- mutate(lobcount, MPA = ifelse(SITE == "IVEE" | SITE == "NAPL", "MPA"
 
 #line graph of abundance by site
 abundance_line_g <- ggplot(lobcount, aes(x = YEAR, y = COUNT, group = SITE, color = SITE)) +
-  geom_line(size = 1, alpha = 0.8, aes(linetype = MPA)) +
+geom_line(size = 1, alpha = 0.8, aes(linetyp  e = MPA)) +
   labs(x = "Year", y = "Number of Lobsters Observed", title = "Spiny Lobster Abundance in the Santa Barbara Channel (2012-2017)") +
   scale_y_continuous(expand = c(0,0)) +
   scale_x_continuous(expand = c(0,0)) +
@@ -522,8 +522,7 @@ lob_prob_table
 
 ```
 
-<<<<<<< HEAD
-=======
+
 ```{r}
 map <- read_csv("Long Lat.csv")
 my_map <- leaflet() %>%
@@ -533,7 +532,6 @@ my_map <- leaflet() %>%
 my_map
 ```
 
->>>>>>> 559aa049a377b4c9dc149db04e6aed2c82fa6a55
 ##CONCLUSION
 
 ##REFERENCES
