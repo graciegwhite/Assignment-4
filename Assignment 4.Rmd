@@ -2,7 +2,10 @@
 title: "Assignment 4"
 author: "Gracie White"
 date: "November 12, 2018"
-output: html_document
+always_allow_html: yes
+output:
+  word_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
