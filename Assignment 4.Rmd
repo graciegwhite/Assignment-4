@@ -111,12 +111,7 @@ geom_line(size = 1, alpha = 0.8, aes(linetype = MPA)) +
 lobcount
 
 # Line Graph of Mean abundance by site
-traps_line_g <- ggplot(lobcount, aes(x = YEAR, y = mean_traps, group = SITE, color = SITE)) +
-  geom_line(size = 1, alpha = 0.8) +
-  theme_classic() +
-  scale_y_continuous(expand = c(0,0)) +
-  scale_x_continuous(expand = c(0,0)) +
-  labs(x = "Year", y = "Observed Traps", title = "Average Annual Observed Lobster Traps at 3 Non-MPA LTER Sites (2012-2017)") + scale_colour_brewer(palette = "YlOrRd")
+traps_line_g <- ggplot(lobcount, aes(x = YEAR, y = mean_traps, group = SITE, color = SITE)) + geom_line(size = 1, alpha = 0.8) + theme_classic() + scale_y_continuous(expand = c(0,0)) + scale_x_continuous(expand = c(0,0)) + labs(x = "Year", y = "Observed Traps", title = "Average Annual Observed Lobster Traps at 3 Non-MPA LTER Sites (2012-2017)") + scale_colour_brewer(palette = "YlOrRd")
 
 #traps_line_g <- ggplot(lobcount, aes(x = YEAR, y = mean_traps, group = SITE, color = SITE)) +
   #geom_line(size = 1, alpha = 0.8) +
@@ -205,14 +200,6 @@ size_sum_df <- lsize_expanded %>%
     sd = round(sd(SIZE), 2))
 size_sum_df
 
-sum_size_table <- kable(size_sum_df, col.names = c("Site", "Lobsters Measured", "Mean", "Standard Deviation"), align = 'c') %>% 
-  kable_styling(bootstrap_options = c("striped", "condensed"), font_size = 11) %>%   
-  column_spec(1, width = "3cm", bold = T) %>% 
-  column_spec(2, width = "3cm") %>% 
-  column_spec(3, width = "3cm") %>% 
-  column_spec(4, width = "1cm") %>% 
-  add_header_above(c(" " = 2, "Carapace Length (mm)" = 2), align = 'c')
-  
 
 sum_size_table
 ```
