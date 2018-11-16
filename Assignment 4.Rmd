@@ -192,6 +192,10 @@ size_bp <- ggplot(lsize_expanded, aes(x = SITE, y = SIZE)) +
   scale_fill_brewer(palette = "YlOrRd")
 size_bp
 
+sumtablexls <- read_csv("meansdssumtable.csv")
+
+
+
 # Create a data summary table to compare means
 size_sum_df <- lsize_expanded %>% 
   group_by(SITE) %>% 
@@ -200,8 +204,7 @@ size_sum_df <- lsize_expanded %>%
     sd = round(sd(SIZE), 2))
 size_sum_df
 
-
-sum_size_table
+  
 ```
 
 *Changes in Lobster Size from 2012-2017 in MPA and non-MPA sites*
