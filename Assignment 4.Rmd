@@ -540,8 +540,8 @@ lob_prob_table
 
 ```
 
-<<<<<<< HEAD
-=======
+
+
 ```{r}
 map <- read_csv("Long Lat.csv")
 my_map <- leaflet() %>%
@@ -551,7 +551,6 @@ my_map <- leaflet() %>%
 my_map
 ```
 
->>>>>>> 559aa049a377b4c9dc149db04e6aed2c82fa6a55
 ##CONCLUSION
 
 ##REFERENCES
