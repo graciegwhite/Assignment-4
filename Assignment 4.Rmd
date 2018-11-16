@@ -22,9 +22,8 @@ library(plotly)
 library(extrafont)
 library(ggrepel)
 library(vcdExtra)
-library(car)
-library(shiny)
 library(effsize)
+
 
 # Load Datasets
 lobster_size_df <- read_csv("lobster_size_abundance.csv")
@@ -108,9 +107,6 @@ lsize_expanded <- uncount(lsize_sites_df, weights = COUNT, .remove = FALSE)
 # One variable (carapace length (mm)), 5 factors
 # Perform one-sided ANOVA
 
-# Run a Levene's test to assess variances
-size_lt <- leveneTest(SIZE ~ SITE, data = lsize_expanded)
-
 # Identify hypotheses
 # H0: Means across all groups are equal
 # HA: At least two group means differ significantly
@@ -170,7 +166,7 @@ lsize_sitesmpa_df <- lobster_size_df %>%
 lsizempa_expanded <- uncount(lsize_sitesmpa_df, weights = COUNT, .remove = FALSE)
 
 # For exploration purposes, perhaps a facet-wrapped histogram of size distributions?
-# Probably should make it look prettier. Let's eventually pick a color theme on color brewer and coordinate all of our visuals! <- like that
+# Probably should make it look prettier. Let's eventually pick a color theme on color brewer and coordinate all of our visuals! 
 size_hist <- ggplot(lsize_expanded, aes(x = SIZE)) +
   geom_histogram(bins = 15, aes(fill = SITE)) +
   facet_wrap(~ SITE, scale = "free") + 
@@ -447,7 +443,22 @@ summary_lobster_size <- lsizempa_expanded %>%
 
 summary_lobster_size
 
+sumlobs <- read_csv("Mean Lobster Size Table.csv")
 
+lobs_size_table <- kable(sumlobs, col.names = c(" ", "2012", "2017", " "), align = 'c') %>% 
+  kable_styling(font_size = 11, "condensed") %>% 
+  group_rows("MPA", 1, 2) %>% 
+  group_rows("Non-MPA", 3, 5) %>% 
+  add_header_above(c(" " = 1, "Mean ± Standard Deviation" = 2, "Difference" = 1), italic = T, align = 'c') %>% 
+  add_header_above(c(" " = 1, "Measured Lobster Carapace Length (mm)" = 3), bold = T, align = 'c') %>% 
+  column_spec(1, width = "1cm") %>% 
+  column_spec(2, width = "2cm") %>% 
+  column_spec(3, width = "2cm") %>% 
+  column_spec(4, width = "1cm")
+  
+
+
+lobs_size_table
 ```
 
 
@@ -502,13 +513,6 @@ lob_prob_table <- kable(lob_prop, digits = 2) %>%
 
 lob_prob_table
 
-```
-
-```{r}
-map <- read_csv("Long Lat")
-my map <- leaflet() %>%
-  addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers(lng=map$Longtitude, lat=map$Latitude, popup="The birthplace of R")
 ```
 
 ##CONCLUSION
