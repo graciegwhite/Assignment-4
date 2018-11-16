@@ -215,6 +215,7 @@ size_hist <- ggplot(lsize_expanded, aes(x = SIZE)) +
   theme(legend.position = "none") + 
   scale_y_continuous(expand = c(0,0))
 
+size_hist
 # Looks normal, how about a qq?
 
 size_qq <- ggplot(lsize_expanded, aes(sample = SIZE)) +
