@@ -11,7 +11,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-Packages and datasets
+
 ```{r, include = FALSE}
 # Install necessary packages
 library(tidyverse)
@@ -30,7 +30,13 @@ lobster_size_df <- read_csv("lobster_size_abundance.csv")
 traps_df <- read_csv("lobster_traps.csv")
 
 ```
-##1. Initial Observations
+##INTRODUCTION
+
+##DATA AND METHODS
+
+##RESULTS AND DISCUSSION
+
+*Lobster Abundance and Fishing Pressure*
 ```{r, echo=FALSE}
 # Fishing Pressure
 # First, filter the data so we only keep relevant info
@@ -55,7 +61,7 @@ traps_line_g
 
 # looks like fishing pressure is decreasing over time. The drop after 2016 is probably a result of the decreased abundance seen in the next figure? Note that there are no traps in the MPA sites. 
 ```
-######Abundance Observations
+
 ```{r, echo=FALSE}
 
 # Filter sites 
@@ -82,8 +88,7 @@ abundance_line_g
 ```
 
 
-
-####Part 2. Compare Mean Lobster Size by Site in 2017
+*Mean Lobster Size in 2017*
 ```{r, echo=FALSE}
 # Reformat size data into tidy format
 # Filter sites and omit counts of "0"
@@ -144,7 +149,7 @@ size_sum_df <- lsize_expanded %>%
 size_sum_df
 ```
 
-####Part 3. Changes in lobster size at MPA and non-MPA sites (comparing only 2012 and 2017 sizes)
+*Changes in Lobster Size from 2012-2017 in MPA and non-MPA sites*
 ```{r, echo=FALSE}
 # MPA Sites: IVEE, NAPL
 # Non-MPA Sites: AQUE, CARP, MOHK
@@ -169,15 +174,11 @@ size_hist <- ggplot(lsize_expanded, aes(x = SIZE)) +
   theme(legend.position = "none") + 
   scale_y_continuous(expand = c(0,0))
 
-size_hist
-
 # Looks normal, how about a qq?
 
 size_qq <- ggplot(lsize_expanded, aes(sample = SIZE)) +
   geom_qq() +
   facet_wrap(~ SITE, scale = "free")
-
-size_qq
 
 # Looks pretty normal
 
@@ -446,7 +447,7 @@ summary_lobster_size
 ```
 
 
-###Part 4
+*Legal and Illegal Lobster Trapping in 2017*
 ```{r, echo=FALSE}
 #chi-square test for independance
 #The legal minimum carapace size for lobster is 82.6 mm. What proportion of observed lobsters at each site are above the legal minimum? Does that proportion differ significantly across the 5 sites? 
@@ -499,3 +500,6 @@ lob_prob_table
 
 ```
 
+##CONCLUSION
+
+##REFERENCES
