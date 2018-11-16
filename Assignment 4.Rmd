@@ -48,7 +48,7 @@ traps5_df <- traps_df %>%
   group_by(SITE, YEAR) 
   
 # Summary table of lobster traps each year by site  
-trap5_sumtable <- summarize(traps5_df, med_traps = median(TRAPS), max_traps = max(TRAPS), mean_traps = mean(TRAPS), sd_traps = sd(TRAPS), sample_size = length(TRAPS))
+trap5_sumtable <- summarize(traps5_df, med_traps = median(TRAPS), max_traps = max(TRAPS), mean_traps = mean(TRAPS), sd_traps = sd(TRAPS), sample_size = length(TRAPS), sum_traps = sum(TRAPS))
 
 
 # Line graph of mean lobster traps by year for each site
@@ -62,6 +62,16 @@ traps_line_g <- ggplot(trap5_sumtable, aes(x = YEAR, y = mean_traps, group = SIT
 traps_line_g
 
 # looks like fishing pressure is decreasing over time. The drop after 2016 is probably a result of the decreased abundance seen in the next figure? Note that there are no traps in the MPA sites. 
+
+
+sum_traps_graph <- ggplot(trap5_sumtable, aes(x = YEAR, y = sum_traps, group = SITE)) + 
+  geom_col(position = "dodge", aes(fill = SITE)) + 
+  theme_classic() +
+  scale_y_continuous(expand = c(0,0)) +
+  scale_x_continuous(expand = c(0,0)) +
+  labs(x = "Year", y = "Total Lobster Traps", title = "Lobster Traps (2012-2017)")
+sum_traps_graph
+  
 ```
 
 ```{r, echo=FALSE}
