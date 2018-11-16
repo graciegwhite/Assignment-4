@@ -508,7 +508,7 @@ lob_prob_table
 map <- read_csv("Long Lat")
 my map <- leaflet() %>%
   addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
+  addMarkers(lng=map$Longtitude, lat=map$Latitude, popup="The birthplace of R")
 ```
 
 ##CONCLUSION
