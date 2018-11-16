@@ -22,10 +22,9 @@ library(plotly)
 library(extrafont)
 library(ggrepel)
 library(vcdExtra)
-library(car)
-library(shiny)
 library(effsize)
 library(leaflet)
+
 
 # Load Datasets
 lobster_size_df <- read_csv("lobster_size_abundance.csv")
@@ -57,7 +56,7 @@ traps_line_g <- ggplot(trap5_sumtable, aes(x = YEAR, y = mean_traps, group = SIT
   theme_classic() +
   scale_y_continuous(expand = c(0,0)) +
   scale_x_continuous(expand = c(0,0)) +
-  labs(x = "Year", y = "Mean Lobster Traps", title = "Average Lobster Traps (2012-2017)")
+  labs(x = "Year", y = "Observed Traps", title = "Average Annual Observed Lobster Traps at 3 Non-MPA LTER Sites (2012-2017)") + scale_colour_brewer(palette = "YlOrRd")
 
 traps_line_g
 
@@ -65,11 +64,7 @@ traps_line_g
 
 
 sum_traps_graph <- ggplot(trap5_sumtable, aes(x = YEAR, y = sum_traps, group = SITE)) + 
-  geom_col(position = "dodge", aes(fill = SITE)) + 
-  theme_classic() +
-  scale_y_continuous(expand = c(0,0)) +
-  scale_x_continuous(expand = c(0,0)) +
-  labs(x = "Year", y = "Total Lobster Traps", title = "Lobster Traps (2012-2017)")
+  geom_col(position = "dodge", aes(fill = SITE)) + scale_fill_brewer(palette = "YlOrRd") + theme_classic() + scale_y_continuous(expand = c(0,0)) + scale_x_continuous(expand = c(0,0)) + labs(x = "Year", y = "Observed Traps", title = "Total Annual Observed Lobster Traps at 3 Non-MPA LTER Sites (2012-2017)")
 sum_traps_graph
   
 ```
@@ -87,15 +82,33 @@ lobcount <- aggregate(COUNT~SITE+YEAR, data = lobcount_allyears_df, sum)
 lobcount <- mutate(lobcount, MPA = ifelse(SITE == "IVEE" | SITE == "NAPL", "MPA", "No MPA")) %>% 
   group_by(SITE, YEAR)
 
-#line graph of abundance by site
-abundance_line_g <- ggplot(lobcount, aes(x = YEAR, y = COUNT, group = SITE, color = SITE)) +
-  geom_line(size = 1, alpha = 0.8, aes(linetype = MPA)) +
-  labs(x = "Year", y = "Number of Lobsters Observed", title = "Spiny Lobster Abundance in the Santa Barbara Channel (2012-2017)") +
+lobcount
+
+
+  
+
+# Line Graph of Mean abundance by site
+traps_line_g <- ggplot(lobcount, aes(x = YEAR, y = mean_traps, group = SITE, color = SITE)) +
+  geom_line(size = 1, alpha = 0.8) +
+  theme_classic() +
   scale_y_continuous(expand = c(0,0)) +
   scale_x_continuous(expand = c(0,0)) +
-  theme_classic()
+  labs(x = "Year", y = "Observed Traps", title = "Average Annual Observed Lobster Traps at 3 Non-MPA LTER Sites (2012-2017)") + scale_colour_brewer(palette = "YlOrRd")
 
-abundance_line_g
+
+# Stacked column graph of total abundance by site
+abundance_line_gcol <- ggplot(lobcount, aes(x = YEAR, y = COUNT, group = SITE)) +
+  geom_col(position = "dodge", aes(fill = SITE)) +
+  labs(x = "Year", y = "Number of Lobsters Observed", title = "Spiny Lobster Abundance in the Santa Barbara Channel (2012-2017)") +
+  scale_y_continuous(expand = c(0,0), breaks = seq(0, 900, 100),limits=c(0,750)) +
+  scale_x_continuous(expand = c(0,0)) +
+  theme_classic() + scale_fill_brewer(palette = "YlOrRd") +
+  facet_grid(~ MPA, space = "fixed")
+
+
+abundance_line_gcol
+
+
 #Abundance has recently increased in IVEE and CARP, but decreased or stayed similar at other sites. Why is there a peak in 2015, and an overall decrease in 2016? Was there an event that we should be aware of? Why is CARP increasing so much when it's not an MPA, and conversely, why is the NAPL MPA decreasing? Perhaps an El Niño event? A change in fishery regulations? A lobster disease? 
 ```
 
@@ -118,9 +131,6 @@ lsize_expanded <- uncount(lsize_sites_df, weights = COUNT, .remove = FALSE)
 ```{r, echo=FALSE}
 # One variable (carapace length (mm)), 5 factors
 # Perform one-sided ANOVA
-
-# Run a Levene's test to assess variances
-size_lt <- leveneTest(SIZE ~ SITE, data = lsize_expanded)
 
 # Identify hypotheses
 # H0: Means across all groups are equal
@@ -181,7 +191,7 @@ lsize_sitesmpa_df <- lobster_size_df %>%
 lsizempa_expanded <- uncount(lsize_sitesmpa_df, weights = COUNT, .remove = FALSE)
 
 # For exploration purposes, perhaps a facet-wrapped histogram of size distributions?
-# Probably should make it look prettier. Let's eventually pick a color theme on color brewer and coordinate all of our visuals! <- like that
+# Probably should make it look prettier. Let's eventually pick a color theme on color brewer and coordinate all of our visuals! 
 size_hist <- ggplot(lsize_expanded, aes(x = SIZE)) +
   geom_histogram(bins = 15, aes(fill = SITE)) +
   facet_wrap(~ SITE, scale = "free") + 
@@ -458,7 +468,22 @@ summary_lobster_size <- lsizempa_expanded %>%
 
 summary_lobster_size
 
+sumlobs <- read_csv("Mean Lobster Size Table.csv")
 
+lobs_size_table <- kable(sumlobs, col.names = c(" ", "2012", "2017", " "), align = 'c') %>% 
+  kable_styling(font_size = 11, "condensed") %>% 
+  group_rows("MPA", 1, 2) %>% 
+  group_rows("Non-MPA", 3, 5) %>% 
+  add_header_above(c(" " = 1, "Mean ± Standard Deviation" = 2, "Difference" = 1), italic = T, align = 'c') %>% 
+  add_header_above(c(" " = 1, "Measured Lobster Carapace Length (mm)" = 3), bold = T, align = 'c') %>% 
+  column_spec(1, width = "1cm") %>% 
+  column_spec(2, width = "2cm") %>% 
+  column_spec(3, width = "2cm") %>% 
+  column_spec(4, width = "1cm")
+  
+
+
+lobs_size_table
 ```
 
 
@@ -514,6 +539,8 @@ lob_prob_table <- kable(lob_prop, digits = 2) %>%
 lob_prob_table
 
 ```
+
+
 
 ```{r}
 map <- read_csv("Long Lat.csv")
