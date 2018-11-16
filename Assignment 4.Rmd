@@ -24,6 +24,7 @@ library(ggrepel)
 library(vcdExtra)
 library(effsize)
 library(leaflet)
+library(car)
 
 
 # Load Datasets
@@ -165,6 +166,7 @@ size_bp <- ggplot(lsize_expanded, aes(x = SITE, y = SIZE)) +
   scale_fill_brewer(palette = "YlOrRd")
 size_bp
 
+sumtablexls <- read_csv("meansdssumtable.csv")
 # Create a data summary table to compare means
 size_sum_df <- lsize_expanded %>% 
   group_by(SITE) %>% 
