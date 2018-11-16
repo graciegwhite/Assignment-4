@@ -25,7 +25,10 @@ library(vcdExtra)
 library(effsize)
 library(leaflet)
 library(car)
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9c2aa68d7c247f7dbde05e49b76cbf450ca80d38
 
 # Load Datasets
 lobster_size_df <- read_csv("lobster_size_abundance.csv")
@@ -33,8 +36,28 @@ traps_df <- read_csv("lobster_traps.csv")
 
 ```
 ##INTRODUCTION
+#####
+  The spiny lobster, *Panulirus interruptus*, is an integral part of the the California kelp forests. A keystone species, the lobsters exert top down control on urchins, and accordingly, the macroalgae that the urchins consume^3^. While research is still being done on the ecosystem dynamics of this predator/prey relationship in the Santa Barbara area, other locations have documented trophic cascades detrimental to kelp forests stemming from excess fishing pressure on the Spiny Lobster^3^. 
+  
+  In addition to ecological importance, the Spiny Lobster also supports a multi-million dollar commercial fishery, and millions more in recreational consumer spending, the third most valuable fishery in area (behind the market squid and Dungeness Crab fisheries)^1,2^. For example, the total 2016 ex-vessel value of the California lobster fishery came to $13,691,364, and brought in an additional estimated $33-$40 million in consumer spending from recreational fishing, diving, and eco-tourism^1^. 
+
+	The State of California has been in charge of managing this fishery for over a century, and while recent regulations seem to have stabilized populations, many are concerned that the heavy fishing of the last century has caused an overall decrease in both size and abundance^3^. If so, then the value of the commercial fishery, and the health of the kelp forests, may be at risk^3^.
+
+	The 2016-2017 season had the lowest catch of the last ten fishing seasons, despite an increase in abundance predicted with the Pacific Decadal Oscillation’s warmer waters^2^. The drop in catch was thus unexpected by the Department of Fish and Wildlife. Another 2016-2017 anomaly noticed by researchers was a shift in geographic location. More catch than ever before originated from the Channel Islands, as opposed to the rest of southern California^2^. These anomalies underscore the importance of a robust fisheries management plan, with continued analysis of its effectiveness. 
+	
+Current management is centered around a limited-entry approach. The fishery is only open from October to March, meant to prevent any harvesting during the spawning season^1^. Recreational fishers are also required to have a specific lobstering license in order to participate, and only a certain number of commercial licenses are awarded each season^2^. To further protect lobsters of spawning age, California also enacted an 82.6mm minimum size limit for carapace length. In theory, this limitation should allow lobsters to reproduce for a year or two before reaching the size limit^1^. 
+
+Additionally, In 2012, the State of California set up 50 new marine protected areas (MPAs) under the Marine Life Protection Act (MLPA) in the the southern part of the state^1^. These MPAs were implemented specifically to conserve fishery resources, such as providing “safe zones” for the Spiny Lobster to reproduce without any fishing pressure^1^. This was not without controversy, as some argued that the creation of MPAs would only serve to increase fishing pressure elsewhere, in non-MPAs, to the detriment of those ecosystems^1^. 
+
+The following report analyzes data between at five Long-Term Ecological Research (LTER) Sites in the Santa Barbara Area, Arroyo Quemado (AQUE), Naples Reef (NAPL), Mohawk Reef (MOHK), Isla Vista (IVEE), Carpinteria (CARP)^4^. Two of the sites, Isla Vista and Naples Reef, were both established as MPAs in 2012. This report will look at the trends in lobster size, overall abundance, and fishing pressure between MPAs and non-MPAs between 2012 and 2017, and suggest potential next steps for monitoring the California Spiny Lobster Fishery. 
 
 ##DATA AND METHODS
+
+#####
+  Data was provided by Santa Barbara Coastal Long Term Ecological Research Project, coordinated by Dan Reed^4^. Starting in August of 2012, divers recorded the number and size of lobsters in four 300m^2^ transects at each SBC LTER site. For the collection of data on fishing pressure, observers with the SBC LTER project counted the number of trap floats in defined areas of each study site. Each float corresponds to one baited lobster trap under the surface. As the Naples Reef and Isla Vista sites are designated MPAs, there were no observed floats at either site for the duration of the study. Data was recorded every two-four weeks during the fishing season^4^. Figure 1 shows the geographic location of each SBC LTER sampling site considered in this report. 
+  
+ 	The data collected was compiled into two tables, one on fishing pressure, and one on lobster size and abundance. Population statistics were analyzed for significant differences in lobster size, abundance, and fishing pressure between MPA and non-MPA sites. Lobster size by site in 2017 was compared with an omnibus ANOVA (alpha = 0.05 unless otherwise indicated), followed by a Tukey’s HSD post hoc test. Changes in lobster size between 2012 and 2017 at each site was tested with a student’s t-test, after an F-Test showed significant evidence to suggest that samples had equal variances. Finally, the proportion of lobsters above and below the minimum size limit was compared across all sites using a chi-square test, and looking at the standardized residuals. All statistical analysis and graphics were performed in R Statistical Software (V 1.1.456). 
+
 
 ##RESULTS AND DISCUSSION
 
@@ -557,5 +580,26 @@ my_map
 ```
 
 ##CONCLUSION
+#####
+The California Spiny Lobster, a keystone species through the california kelp forest ecosystems, also supports an economically important commercial and recreational fishery. In order to preserve lobster populations, California established multiple marine protected areas (MPAs) in 2012 to create “safe zones” for lobsters to spawn undisturbed by fishing pressure. This report aims to analyze the differences in lobster size, abundance, and fishing pressure by site, specifically comparing the differences between MPA sites and non-MPA sites. The following statements summarize the findings of this report:
+
+Statement 1
+Statement 2
+Statement 3
+Statement 4
+
+In order to stay up to date on management best practices, this report should be updated yearly with new data, especially since many variables other than fishing pressure can have a large and immediate impact on loster populations, such as anomalies in water temperature from the Pacific Decadal Oscillation. Fishery managers should know as soon as possible when there are major disturbances to lobster populations in order to make well-informed decisions about how to optimize the lobster fishery for both economic value and conservation. Given that the establishment of the southern California MPAs are fairly recent, longer term monitoring is needed to determine if they boost net lobster populations, or create detrimental pressure to non-MPA zones. Studies such as the SBC LTER will be essential in monitoring these changes going forward. 
+
+
 
 ##REFERENCES
+
+#####
+1. California Department of Fish and Wildlife, Marine Region. “California Spiny Lobster Fishery Management Plan.” California Spiny Lobster Fishery Management Plan, 13 Apr. 2016. www.wildlife.ca.gov/Conservation/Marine/Lobster-FMP.
+
+2. California Department of Fish and Wildlife Marine Region: Invertebrate Project. “Spiny Lobster Fishery Management Plan Harvest Control Rule.” Spiny Lobster Fishery Management Plan Harvest Control Rule, 9 Apr. 2018. nrm.dfg.ca.gov/FileHandler.ashx?DocumentID=156078&inline.
+
+3. Guenther, Carla M., et al. “Trophic Cascades Induced by Lobster Fishing Are Not Ubiquitous in Southern California Kelp Forests.” PLoS ONE, vol. 7, no. 11, 2012, doi:10.1371/journal.pone.0049396.
+
+4. Reed, D. . 2017. SBC LTER: Reef: Abundance, size and fishing effort for California Spiny Lobster (Panulirus interruptus), ongoing since 2012. Santa Barbara Coastal Long 
+
