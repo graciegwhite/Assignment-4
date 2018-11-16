@@ -25,10 +25,7 @@ library(vcdExtra)
 library(effsize)
 library(leaflet)
 library(car)
-<<<<<<< HEAD
 
-=======
->>>>>>> 9c2aa68d7c247f7dbde05e49b76cbf450ca80d38
 
 # Load Datasets
 lobster_size_df <- read_csv("lobster_size_abundance.csv")
@@ -530,6 +527,8 @@ lsize_prop_table <- lsize_expanded %>%
 
 rownames(lsize_prop_table) <- c("AQUE", "CARP", "IVEE", "MOHK", "NAPL")
 
+lsize_prop_table
+
 #H0:There is no different in proportions
 #HA: There is a difference in proportions
 
@@ -571,10 +570,13 @@ lob_prob_table
 
 
 ```{r}
-map <- read_csv("Long Lat.csv")
+#map <- read_csv("Long Lat.csv")
+lobster_icon <- makeIcon("small_lob.png", "small_lob@2x.png", 18, 40, background = FALSE)
 my_map <- leaflet() %>%
   addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers(lng=map$Longtitude, lat=map$Latitude, popup="LTER Site")
+  addMarkers(icon = lob_icon, lng=map$Longtitude, lat=map$Latitude, popup="LTER Site") 
+  
+lob_icon <- makeIcon("http://www.stickpng.com/assets/thumbs/585d3b7ecb11b227491c3355.png", 18, 40)
 
 my_map
 ```
