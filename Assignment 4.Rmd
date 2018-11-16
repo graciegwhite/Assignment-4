@@ -90,10 +90,8 @@ geom_line(size = 1, alpha = 0.8, aes(linetyp  e = MPA)) +
 =======
 lobcount
 
-
-  
-
 # Line Graph of Mean abundance by site
+<<<<<<< HEAD
 traps_line_g <- ggplot(lobcount, aes(x = YEAR, y = mean_traps, group = SITE, color = SITE)) +
   geom_line(size = 1, alpha = 0.8) +
   theme_classic() +
@@ -101,6 +99,14 @@ traps_line_g <- ggplot(lobcount, aes(x = YEAR, y = mean_traps, group = SITE, col
   scale_y_continuous(expand = c(0,0)) +
   scale_x_continuous(expand = c(0,0)) +
   labs(x = "Year", y = "Observed Traps", title = "Average Annual Observed Lobster Traps at 3 Non-MPA LTER Sites (2012-2017)") + scale_colour_brewer(palette = "YlOrRd")
+=======
+#traps_line_g <- ggplot(lobcount, aes(x = YEAR, y = mean_traps, group = SITE, color = SITE)) +
+  #geom_line(size = 1, alpha = 0.8) +
+  #theme_classic() +
+  #scale_y_continuous(expand = c(0,0)) +
+  #scale_x_continuous(expand = c(0,0)) +
+ # labs(x = "Year", y = "Observed Traps", title = "Average Annual Observed Lobster Traps at 3 Non-MPA LTER Sites (2012-2017)") + scale_colour_brewer(palette = "YlOrRd")
+>>>>>>> 4c15c8d2686a724e716d1f02c1195425f1dc67d0
 
 
 # Stacked column graph of total abundance by site
@@ -139,6 +145,8 @@ lsize_expanded <- uncount(lsize_sites_df, weights = COUNT, .remove = FALSE)
 # One variable (carapace length (mm)), 5 factors
 # Perform one-sided ANOVA
 
+leveneTest(SIZE ~ SITE, data = lsize_expanded)
+
 # Identify hypotheses
 # H0: Means across all groups are equal
 # HA: At least two group means differ significantly
@@ -159,6 +167,7 @@ summary(size_aov)
 size_pht <- TukeyHSD(size_aov)
 size_pht
 
+# Extract labels and factor levels from Tukey post-hoc 
 # p-value is <0.05 for sites (NAPL-CARP), (NAPL-IVEE)
 # Reject the null for sites (NAPL-CARP), (NAPL-IVEE)
 
@@ -169,7 +178,7 @@ size_bp <- ggplot(lsize_expanded, aes(x = SITE, y = SIZE)) +
   xlab("Site") +
   ylab("Carapace Length (mm)") +
   theme_classic() +
-  scale_colour_brewer("Site", palette = "Set2")
+  scale_colour_brewer("Site", palette = "YlOrRd")
 size_bp
 
 # Create a data summary table to compare means
