@@ -4,8 +4,8 @@ author: "Gracie White"
 date: "November 12, 2018"
 always_allow_html: yes
 output:
-  word_document: default
   html_document: default
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}
