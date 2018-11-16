@@ -82,32 +82,28 @@ lobcount <- aggregate(COUNT~SITE+YEAR, data = lobcount_allyears_df, sum)
 lobcount <- mutate(lobcount, MPA = ifelse(SITE == "IVEE" | SITE == "NAPL", "MPA", "No MPA")) %>% 
   group_by(SITE, YEAR)
 
-<<<<<<< HEAD
+
 #line graph of abundance by site
 abundance_line_g <- ggplot(lobcount, aes(x = YEAR, y = COUNT, group = SITE, color = SITE)) +
-geom_line(size = 1, alpha = 0.8, aes(linetyp  e = MPA)) +
+geom_line(size = 1, alpha = 0.8, aes(linetype = MPA)) +
   labs(x = "Year", y = "Number of Lobsters Observed", title = "Spiny Lobster Abundance in the Santa Barbara Channel (2012-2017)") +
-=======
+
 lobcount
 
 # Line Graph of Mean abundance by site
-<<<<<<< HEAD
 traps_line_g <- ggplot(lobcount, aes(x = YEAR, y = mean_traps, group = SITE, color = SITE)) +
   geom_line(size = 1, alpha = 0.8) +
   theme_classic() +
->>>>>>> 8755145226f8e36b9cd3a96675b8c544febe637a
   scale_y_continuous(expand = c(0,0)) +
   scale_x_continuous(expand = c(0,0)) +
   labs(x = "Year", y = "Observed Traps", title = "Average Annual Observed Lobster Traps at 3 Non-MPA LTER Sites (2012-2017)") + scale_colour_brewer(palette = "YlOrRd")
-=======
+
 #traps_line_g <- ggplot(lobcount, aes(x = YEAR, y = mean_traps, group = SITE, color = SITE)) +
   #geom_line(size = 1, alpha = 0.8) +
   #theme_classic() +
   #scale_y_continuous(expand = c(0,0)) +
   #scale_x_continuous(expand = c(0,0)) +
  # labs(x = "Year", y = "Observed Traps", title = "Average Annual Observed Lobster Traps at 3 Non-MPA LTER Sites (2012-2017)") + scale_colour_brewer(palette = "YlOrRd")
->>>>>>> 4c15c8d2686a724e716d1f02c1195425f1dc67d0
-
 
 # Stacked column graph of total abundance by site
 abundance_line_gcol <- ggplot(lobcount, aes(x = YEAR, y = COUNT, group = SITE)) +
@@ -185,11 +181,20 @@ size_bp
 size_sum_df <- lsize_expanded %>% 
   group_by(SITE) %>% 
   summarize(count = n(), 
-    mean = mean(SIZE),
-    sd = sd(SIZE))
+    mean = round(mean(SIZE),2),
+    sd = round(sd(SIZE), 2))
 size_sum_df
 
-sum_size_table <- kable(size_sum_df)
+sum_size_table <- kable(size_sum_df, col.names = c("Site", "Lobsters Measured", "Mean", "Standard Deviation"), align = 'c') %>% 
+  kable_styling(bootstrap_options = c("striped", "condensed"), font_size = 11) %>%   
+  column_spec(1, width = "3cm", bold = T) %>% 
+  column_spec(2, width = "3cm") %>% 
+  column_spec(3, width = "3cm") %>% 
+  column_spec(4, width = "1cm") %>% 
+  add_header_above(c(" " = 2, "Carapace Length (mm)" = 2), align = 'c')
+  
+
+sum_size_table
 ```
 
 *Changes in Lobster Size from 2012-2017 in MPA and non-MPA sites*
@@ -560,10 +565,6 @@ lob_prob_table
 ```
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 8755145226f8e36b9cd3a96675b8c544febe637a
 ```{r}
 map <- read_csv("Long Lat.csv")
 my_map <- leaflet() %>%
