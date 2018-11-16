@@ -25,6 +25,7 @@ library(vcdExtra)
 library(car)
 library(shiny)
 library(effsize)
+library(leaflet)
 
 # Load Datasets
 lobster_size_df <- read_csv("lobster_size_abundance.csv")
@@ -505,10 +506,12 @@ lob_prob_table
 ```
 
 ```{r}
-map <- read_csv("Long Lat")
-my map <- leaflet() %>%
+map <- read_csv("Long Lat.csv")
+my_map <- leaflet() %>%
   addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers(lng=map$Longtitude, lat=map$Latitude, popup="The birthplace of R")
+  addMarkers(lng=map$Longtitude, lat=map$Latitude, popup="LTER Site")
+
+my_map
 ```
 
 ##CONCLUSION
