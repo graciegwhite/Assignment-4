@@ -157,12 +157,12 @@ size_pht
 
 # Create a box-plot for visual mean comparison
 size_bp <- ggplot(lsize_expanded, aes(x = SITE, y = SIZE)) +
-  geom_boxplot(aes(color = SITE)) +
+  geom_boxplot(aes(fill = SITE), color = "black") +
   ggtitle("Lobster Carapace Lengths at 5 LTER Sites in the Santa Barbara Channel, 2017") +
   xlab("Site") +
   ylab("Carapace Length (mm)") +
   theme_classic() +
-  scale_colour_brewer("Site", palette = "YlOrRd")
+  scale_fill_brewer(palette = "YlOrRd")
 size_bp
 
 # Create a data summary table to compare means
