@@ -25,10 +25,7 @@ library(vcdExtra)
 library(effsize)
 library(leaflet)
 library(car)
-<<<<<<< HEAD
 
-=======
->>>>>>> 9c2aa68d7c247f7dbde05e49b76cbf450ca80d38
 
 # Load Datasets
 lobster_size_df <- read_csv("lobster_size_abundance.csv")
