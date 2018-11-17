@@ -25,6 +25,7 @@ library(vcdExtra)
 library(effsize)
 library(leaflet)
 library(car)
+library(agricolae)
 
 # Load Datasets
 lobster_size_df <- read_csv("lobster_size_abundance.csv")
@@ -104,11 +105,13 @@ lobcount <- mutate(lobcount, MPA = ifelse(SITE == "IVEE" | SITE == "NAPL", "MPA"
 
 
 #line graph of abundance by site
-abundance_line_g <- ggplot(lobcount, aes(x = YEAR, y = COUNT, group = SITE, color = SITE)) +
-geom_line(size = 1, alpha = 0.8, aes(linetype = MPA)) +
-  labs(x = "Year", y = "Number of Lobsters Observed", title = "Spiny Lobster Abundance in the Santa Barbara Channel (2012-2017)") +
+
+
+abundance_line_g <- ggplot(lobcount, aes(x = YEAR, y = COUNT, group = SITE, color = SITE))+ geom_line(size = 1, alpha = 0.8, aes(linetype = MPA))+ labs(x = "Year", y = "Number of Lobsters Observed", title = "Spiny Lobster Abundance in the Santa Barbara Channel (2012-2017)")
 
 lobcount
+
+abundance_line_g
 
 # Line Graph of Mean abundance by site
 traps_line_g <- ggplot(lobcount, aes(x = YEAR, y = mean_traps, group = SITE, color = SITE)) + geom_line(size = 1, alpha = 0.8) + theme_classic() + scale_y_continuous(expand = c(0,0)) + scale_x_continuous(expand = c(0,0)) + labs(x = "Year", y = "Observed Traps", title = "Average Annual Observed Lobster Traps at 3 Non-MPA LTER Sites (2012-2017)") + scale_colour_brewer(palette = "YlOrRd")
@@ -192,10 +195,11 @@ size_bp <- ggplot(lsize_expanded, aes(x = SITE, y = SIZE)) +
   scale_fill_brewer(palette = "YlOrRd")
 size_bp
 
+
 sumtablexls <- read_csv("meansdssumtable.csv")
 
-
-
+hsd <- HSD.test(size_aov, "SITE", group = TRUE)
+hsd
 # Create a data summary table to compare means
 size_sum_df <- lsize_expanded %>% 
   group_by(SITE) %>% 
@@ -204,7 +208,21 @@ size_sum_df <- lsize_expanded %>%
     sd = round(sd(SIZE), 2))
 size_sum_df
 
+lsize_table <- read_csv("lsize2017table.csv")
+
+lsize_table2 <- read_csv("lsize2017table2.csv")
+
+lsize_2017 <- kable(lsize_table2, col.names = c(" ", "Count (Lobsters)", "Mean ± Standard Deviation", "Like-Mean Groups"), align = 'c') %>% 
+  kable_styling(font_size = 11, "condensed") %>% 
+  group_rows("MPA", 1, 2) %>% 
+  group_rows("Non-MPA", 3, 5) %>% 
+  add_header_above(c(" " = 2, "Measured Lobster Carapace Length (mm)" = 1, " " = 1)) %>% 
+  column_spec(1, width = "1cm") %>% 
+  column_spec(2, width = "1cm") %>% 
+  column_spec(3, width = "2cm") %>% 
+  column_spec(4, width = "1cm")
   
+lsize_2017
 ```
 
 *Changes in Lobster Size from 2012-2017 in MPA and non-MPA sites*
@@ -536,6 +554,8 @@ lsize_prop_table <- lsize_expanded %>%
 
 rownames(lsize_prop_table) <- c("AQUE", "CARP", "IVEE", "MOHK", "NAPL")
 
+lsize_prop_table
+
 #H0:There is no different in proportions
 #HA: There is a difference in proportions
 
@@ -566,20 +586,33 @@ Standardized residuals greater than |2| indicate significance (I think?)
 ```{r, echo=FALSE}
 #Making a neat Kable Table of the proportions 
 
+legaltable <- read.csv("legaltable.csv")
+legaltable2 <- read.csv("legaltable2.csv")
 
-lob_prob_table <- kable(lob_prop, digits = 2) %>% 
-  kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE) 
+prop_table2 <- kable(legaltable2, col.names = c(" ", "Count (Lobsters)", "Legal (< 82.6 mm)", "Illegal (> 82.6 mm)"), align = 'c') %>% 
+  kable_styling(font_size = 11, "condensed") %>% 
+  group_rows("MPA", 1, 2) %>% 
+  group_rows("Non-MPA", 3, 5) %>% 
+  add_header_above(c(" " = 2, "Carapce Length" = 2), italic = T, align = 'c') %>% 
+  add_header_above(c(" " = 2, "Proportion of Lobsters Measured" = 2), bold = T, align = 'c') %>% 
+  column_spec(1, width = "1cm") %>% 
+  column_spec(2, width = "1cm") %>% 
+  column_spec(3, width = "2cm") %>% 
+  column_spec(4, width = "2cm")
 
-lob_prob_table
-
+prop_table2
+  
 ```
 
 
 ```{r}
-map <- read_csv("Long Lat.csv")
+#map <- read_csv("Long Lat.csv")
+lobster_icon <- makeIcon("small_lob.png", "small_lob@2x.png", 18, 40, background = FALSE)
 my_map <- leaflet() %>%
   addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers(lng=map$Longtitude, lat=map$Latitude, popup="LTER Site")
+  addMarkers(icon = lob_icon, lng=map$Longtitude, lat=map$Latitude, popup="LTER Site") 
+  
+lob_icon <- makeIcon("http://www.stickpng.com/assets/thumbs/585d3b7ecb11b227491c3355.png", 18, 40)
 
 my_map
 ```
