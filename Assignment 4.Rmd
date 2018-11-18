@@ -597,7 +597,7 @@ Standardized residuals greater than |2| indicate significance (I think?)
 legaltable <- read.csv("legaltable.csv")
 legaltable2 <- read.csv("legaltable2.csv")
 
-prop_table2 <- kable(legaltable2, col.names = c(" ", "Count (Lobsters)", "Legal (< 82.6 mm)", "Illegal (> 82.6 mm)"), align = 'c') %>% 
+prop_table2 <- kable(legaltable2, col.names = c(" ", "Count (Lobsters)", "Illegal (< 82.6 mm)", "Legal (> 82.6 mm)"), align = 'c') %>% 
   kable_styling(font_size = 11, "condensed") %>% 
   group_rows("MPA", 1, 2) %>% 
   group_rows("Non-MPA", 3, 5) %>% 
