@@ -224,6 +224,8 @@ lsize_2017 <- kable(lsize_table2, col.names = c(" ", "Count (Lobsters)", "Mean Â
   
 lsize_2017
 ```
+####Table 1. Lobster Size at 5 LTER Sites in the Santa Barbara Channel, 2017
+Sample means of measured carapce lengths Â± 1 standard deviation (mm) of lobsters in 2017. Count represents the number of lobsters measured at each site. Like letters indicate means that do not differ significantly by one-way ANOVA (F(4,1663) = 3.424, p = 0.0085, $\alpha$ = 0.05) with Tukey's HSD ($\alpha$ = 0.05). 
 
 *Changes in Lobster Size from 2012-2017 in MPA and non-MPA sites*
 ```{r, echo=FALSE}
