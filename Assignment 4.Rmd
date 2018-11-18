@@ -229,7 +229,7 @@ lsize_2017 <- kable(lsize_table2, col.names = c(" ", "Count (Lobsters)", "Mean �
 lsize_2017
 ```
 ####Table 1. Lobster Size at 5 LTER Sites in the Santa Barbara Channel, 2017
-Sample means of measured carapce lengths ± 1 standard deviation (mm) of lobsters in 2017. Count represents the number of lobsters measured at each site. Like letters indicate means that do not differ significantly by one-way ANOVA (F(4,1663) = 3.424, p = 0.0085, $\alpha$ = 0.05) with Tukey's HSD ($\alpha$ = 0.05). 
+Sample means of measured carapce lengths ± 1 standard deviation (mm) of lobsters in 2017. Count represents the number of lobsters measured at each site. Like letters indicate means that do not differ significantly by one-way ANOVA (F(4) = 3.424, p = 0.0085, $\alpha$ = 0.05) with Tukey's HSD ($\alpha$ = 0.05). 
 
 *Changes in Lobster Size from 2012-2017 in MPA and non-MPA sites*
 ```{r, echo=FALSE}
@@ -482,7 +482,7 @@ MOHK_ftest
 
 # P-value = 0.1509, so variances are considered EQUAL
 
-# T-Test for NAPL
+# T-Test for MOHK
 # H0: Samples are drawn from populations with the same mean
 # HA: Samples are drawn from populations with different means
 
@@ -493,7 +493,7 @@ t_MOHK
 # Reject Null, samples are drawn from populations with different means
 # Sample means (2012 = 77.25, 2017 = 72)
 
-# One-Sided T-Test for NAPL
+# One-Sided T-Test for MOHK
 # H0: The mean lobster size in 2012 is not greater than mean lobster size in 2017
 # HA: The mean lobster size in 2012 is greater than the mean lobster size in 2017
 
@@ -543,6 +543,8 @@ lobs_size_table <- kable(sumlobs, col.names = c(" ", "2012", "2017", " "), align
 
 lobs_size_table
 ```
+####Table 2. Change in Lobster Size at 5 LTER Sites in the Santa Barbara Channel between 2012 and 2017.
+Sample means of measured carapce lengths ± 1 standard deviation (mm) of lobsters in 2012 and 2017. The number of lobsters measured at each site in each year is listed as (n = ss). Two-Sample Student T-Tests were performed comparing mean lobster size at each site in 2012 and 2017. The only significant difference in mean lobster size from 2012 to 2017 was found at MOHK (t(259) = 4.069, p <.001, $\alpha$ = 0.05) The actual change in mean carapace length (mm) is described in the "difference" column.  
 
 
 *Legal and Illegal Lobster Trapping in 2017*
@@ -628,9 +630,13 @@ my_map
 The California Spiny Lobster, a keystone species through the california kelp forest ecosystems, also supports an economically important commercial and recreational fishery. In order to preserve lobster populations, California established multiple marine protected areas (MPAs) in 2012 to create “safe zones” for lobsters to spawn undisturbed by fishing pressure. This report aims to analyze the differences in lobster size, abundance, and fishing pressure by site, specifically comparing the differences between MPA sites and non-MPA sites. The following statements summarize the findings of this report:
 
 Statement 1
+Fishing pressure is decreasing over time, and severly decreased in 2017. There is a spike in lobster abundance in 2015, and a drop in 2016. 2017 lobster abundance then increases again. 
 Statement 2
+By site lobster sizes in 2017. NAPL has the largest mean lobster size. A one-way anova was performed to compare mean carapass length in lobsters across sites. There was a significant difference. A post-hoc TUKEY HSD was performed to make pairwise comaparisons. NAPL-IVEE and NAPL-CARP had significantly different means. 
 Statement 3
+Mean lobster sizes were compared for each site between 2012 and 2017. F tests for equal variances were ran (equal for all) and thus student t-tests were used to compare means across years. Effect size and power tests were also ran for each t-test. The only significant result for a difference in mean size between the two years is at MOHK. A one-way t-test was ran and sigfnicant that mean lobster size decreased in 2017 from 2012. While not statistically significant, the observed sample means show a small increase in lobster size in the MPA sites  & AQUE, and a decrease in mean lobster size at CARP and MOHK (mohk is stat. sig.)
 Statement 4
+Compared proportions of legal vs. illegal lobsters (based on carapace length) at each site in 2017. Proportions between legal and illegal lobster size is significantly different at MOHK and NAPL. At MOHK, 87% of lobsters observed were smaller than the legal limit. At NAPL, only 66% of lobsters were smaller than the legal limit. The other three sites, saw 74-78% of the lobsters smaller than the legal size limit. A chi-square test for proportions and compared standardized residuals. 
 
 In order to stay up to date on management best practices, this report should be updated yearly with new data, especially since many variables other than fishing pressure can have a large and immediate impact on loster populations, such as anomalies in water temperature from the Pacific Decadal Oscillation. Fishery managers should know as soon as possible when there are major disturbances to lobster populations in order to make well-informed decisions about how to optimize the lobster fishery for both economic value and conservation. Given that the establishment of the southern California MPAs are fairly recent, longer term monitoring is needed to determine if they boost net lobster populations, or create detrimental pressure to non-MPA zones. Studies such as the SBC LTER will be essential in monitoring these changes going forward. 
 
