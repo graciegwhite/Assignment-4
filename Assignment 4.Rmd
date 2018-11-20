@@ -81,7 +81,7 @@ traps_line_g <- ggplot(trap5_sumtable, aes(x = YEAR, y = mean_traps, group = SIT
   theme_classic() +
   scale_y_continuous(expand = c(0,0)) +
   scale_x_continuous(expand = c(0,0)) +
-  labs(x = "Year", y = "Observed Traps", title = "Average Annual Observed Lobster Traps at 3 Non-MPA LTER Sites (2012-2017)") + scale_colour_brewer(palette = "YlOrRd")
+  labs(x = "Year", y = "Observed Traps", title = "Mean Annual Observed Lobster Traps at 3 Non-MPA LTER Sites (2012-2017)") + scale_colour_brewer(palette = "YlOrRd")
 
 traps_line_g
 
@@ -612,18 +612,6 @@ prop_table2
   
 ```
 
-
-```{r}
-#map <- read_csv("Long Lat.csv")
-lobster_icon <- makeIcon("small_lob.png", "small_lob@2x.png", 18, 40, background = FALSE)
-my_map <- leaflet() %>%
-  addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers(icon = lob_icon, lng=map$Longtitude, lat=map$Latitude, popup="LTER Site") 
-  
-lob_icon <- makeIcon("http://www.stickpng.com/assets/thumbs/585d3b7ecb11b227491c3355.png", 18, 40)
-
-my_map
-```
 
 ##CONCLUSION
 #####
